@@ -4,4 +4,4 @@ angular.module('borg.authentication', [
 ]);
 
 angular.module('borg.authentication.controllers', []);
-angular.module('borg.authentication.services', []);
+angular.module('borg.authentication.services', ['ngCookies']);
