@@ -16,7 +16,7 @@ class Thought(models.Model):
         return '{0}'.format(self.content)
 
     @receiver(pre_delete, sender=UserProfile)
-    def delete_thoughts_for_account(sender, instance=None, **kwargs):
+    def delete_thoughts_for_profile(sender, instance=None, **kwargs):
         if instance:
             thoughts = Thought.objects.filter(author=instance)
             thoughts.delete()
