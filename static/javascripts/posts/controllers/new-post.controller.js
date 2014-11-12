@@ -19,8 +19,6 @@
 
     vm.submit = submit;
 
-    console.log(vm);
-
     /**
      * @name submit
      * @desc Create a new Post

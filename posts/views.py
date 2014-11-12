@@ -1,14 +1,14 @@
 from rest_framework import generics, permissions
 
 from authentication.models import UserProfile
-from thoughts.models import Thought
-from thoughts.permissions import IsAuthenticatedAndOwnsObject
-from thoughts.serializers import ThoughtSerializer
+from posts.models import Post
+from posts.permissions import IsAuthenticatedAndOwnsObject
+from posts.serializers import PostSerializer
 
 
-class ThoughtListCreateView(generics.ListCreateAPIView):
-    queryset = Thought.objects.order_by('-created_at')
-    serializer_class = ThoughtSerializer
+class PostListCreateView(generics.ListCreateAPIView):
+    queryset = Post.objects.order_by('-created_at')
+    serializer_class = PostSerializer
 
     def get_permissions(self):
         if self.request.method == 'POST':
@@ -17,12 +17,12 @@ class ThoughtListCreateView(generics.ListCreateAPIView):
 
     def pre_save(self, obj):
         obj.author = UserProfile.objects.get(user=self.request.user)
-        return super(ThoughtListCreateView, self).pre_save(obj)
+        return super(PostListCreateView, self).pre_save(obj)
 
 
-class ThoughtRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Thought.objects.all()
-    serializer_class = ThoughtSerializer
+class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
     def get_permissions(self):
         if self.request.method not in permissions.SAFE_METHODS:

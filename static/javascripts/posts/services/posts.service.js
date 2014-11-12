@@ -32,7 +32,7 @@
      * @memberOf thinkster.posts.services.Posts
      */
     function all() {
-      return $http.get('/api/v1/thoughts/');
+      return $http.get('/api/v1/posts/');
     }
 
 
@@ -44,7 +44,7 @@
      * @memberOf thinkster.posts.services.Posts
      */
     function create(content) {
-      return $http.post('/api/v1/thoughts/', {
+      return $http.post('/api/v1/posts/', {
         content: content
       });
     }

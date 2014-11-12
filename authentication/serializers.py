@@ -30,13 +30,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
     email = serializers.CharField(source='user.email', required=False)
     first_name = serializers.CharField(source='user.first_name', required=False)
     last_name = serializers.CharField(source='user.last_name', required=False)
-    thoughts = serializers.RelatedField(source='thought_set', many=True)
+    posts = serializers.RelatedField(source='post_set', many=True)
 
     class Meta:
         model = UserProfile
         fields = (
             'id', 'username', 'email', 'first_name', 'last_name', 'tagline',
-            'created_at', 'updated_at', 'thoughts',
+            'created_at', 'updated_at', 'posts',
         )
         read_only_fields = ('created_at', 'updated_at',)
 

@@ -29,7 +29,7 @@
      * @memberOf thinkster.posts.controllers.PostsController
      */
     function activate() {
-      $scope.$watch(function () { return $scope.posts; }, render);
+      $scope.$watchCollection(function () { return $scope.posts; }, render);
       $scope.$watch(function () { return $(window).width(); }, render);
     }
     

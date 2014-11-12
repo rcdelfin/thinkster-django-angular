@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from authentication.models import UserProfile
 
 
-class Thought(models.Model):
+class Post(models.Model):
     author = models.ForeignKey(UserProfile)
     content = models.TextField()
 
@@ -15,8 +15,8 @@ class Thought(models.Model):
     def __unicode__(self):
         return '{0}'.format(self.content)
 
-    @receiver(pre_delete, sender=UserProfile)
+    receiver(pre_delete, sender=UserProfile)
     def delete_thoughts_for_profile(sender, instance=None, **kwargs):
         if instance:
-            thoughts = Thought.objects.filter(author=instance)
-            thoughts.delete()
+            posts = Post.objects.filter(author=instance)
+            posts.delete()

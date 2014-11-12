@@ -32,12 +32,10 @@
 
       $scope.$on('post.created', function (event, post) {
         vm.posts.unshift(post);
-        vm.posts = vm.posts.slice(0);
       });
 
       $scope.$on('post.created.error', function () {
         vm.posts.shift();
-        vm.posts = vm.posts.slice(0);
       });
 
 
@@ -46,7 +44,6 @@
        * @desc Update thoughts array on view
        */
       function postsSuccessFn(data, status, headers, config) {
-        vm.promiseResolved = true;
         vm.posts = data.data;
       }
 

@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from thoughts.models import Thought
+from posts.models import Post
 
 
 class IsAuthenticatedAndOwnsObject(permissions.BasePermission):
@@ -10,4 +10,4 @@ class IsAuthenticatedAndOwnsObject(permissions.BasePermission):
 
         _id = self.kwargs['pk']
 
-        return Thought.objects.filter(id=_id, author_id=request.user).exists()
+        return Post.objects.filter(id=_id, author_id=request.user).exists()
