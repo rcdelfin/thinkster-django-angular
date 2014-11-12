@@ -16,8 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
     def restore_object(self, attrs, instance=None):
         user = super(UserSerializer, self).restore_object(attrs, instance)
 
-        if hasattr(attrs, 'password'):
-            user.set_password(attrs.get('password'))
+        password = attrs.get('password', None)
+
+        if password:
+            user.set_password(password)
 
         return user
 
@@ -25,15 +27,16 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(source='pk', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
-    email = serializers.CharField(source='user.email')
-    first_name = serializers.CharField(source='user.first_name')
-    last_name = serializers.CharField(source='user.last_name')
+    email = serializers.CharField(source='user.email', required=False)
+    first_name = serializers.CharField(source='user.first_name', required=False)
+    last_name = serializers.CharField(source='user.last_name', required=False)
+    thoughts = serializers.RelatedField(source='thought_set', many=True)
 
     class Meta:
         model = UserProfile
         fields = (
             'id', 'username', 'email', 'first_name', 'last_name', 'tagline',
-            'created_at', 'updated_at',
+            'created_at', 'updated_at', 'thoughts',
         )
         read_only_fields = ('created_at', 'updated_at',)
 

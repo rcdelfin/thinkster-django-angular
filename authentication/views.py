@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from rest_framework import generics, permissions, status, views
 from rest_framework.response import Response
 
-from authentication.serializers import UserSerializer
-
+from authentication.permissions import IsAuthenticatedAndOwnsProfile
+from authentication.models import UserProfile
+from authentication.serializers import UserProfileSerializer, UserSerializer
 
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -46,4 +47,20 @@ class LogoutView(views.APIView):
     def post(self, request, format=None):
         logout(request)
 
-        return Response({'status': 200})
+        return Response({ 'success': True })
+
+
+class UserProfileRetrieveUpdateView(generics.RetrieveUpdateAPIView):
+    lookup_field = 'user__username'
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return (permissions.AllowAny(),)
+        return (IsAuthenticatedAndOwnsProfile(),)
+
+
+class UserDestroyView(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

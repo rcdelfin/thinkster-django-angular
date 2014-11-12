@@ -1,7 +1,15 @@
-angular.module('borg.authentication', [
-  'borg.authentication.controllers',
-  'borg.authentication.services'
-]);
+(function () {
+  'use strict';
 
-angular.module('borg.authentication.controllers', []);
-angular.module('borg.authentication.services', ['ngCookies']);
+  angular
+    .module('thinkster.authentication', [
+      'thinkster.authentication.controllers',
+      'thinkster.authentication.services'
+    ]);
+
+  angular
+    .module('thinkster.authentication.controllers', []);
+
+  angular
+    .module('thinkster.authentication.services', ['ngCookies']);
+})();
