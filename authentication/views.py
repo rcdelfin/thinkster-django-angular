@@ -56,7 +56,7 @@ class UserProfileRetrieveUpdateView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
 
     def get_permissions(self):
-        if self.request.method == 'GET':
+        if self.request.method in permissions.SAFE_METHODS:
             return (permissions.AllowAny(),)
         return (IsAuthenticatedAndOwnsProfile(),)
 

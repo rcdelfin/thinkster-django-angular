@@ -18,7 +18,6 @@
     var vm = this;
 
     vm.columns = [];
-    vm.promiseResolved = false;
 
     activate();
 

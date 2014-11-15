@@ -15,7 +15,7 @@
     $routeProvider.when('/', {
       controller: 'IndexController', 
       controllerAs: 'vm',
-      templateUrl: '/static/templates/static/index.html'
+      templateUrl: '/static/templates/layout/index.html'
     }).when('/register', {
       controller: 'RegisterController', 
       controllerAs: 'vm',
