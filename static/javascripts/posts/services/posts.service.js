@@ -18,6 +18,7 @@
   function Posts($http) {
     var Posts = {
       all: all,
+      get: get,
       create: create
     };
 
@@ -47,6 +48,18 @@
       return $http.post('/api/v1/posts/', {
         content: content
       });
+    }
+
+
+    /**
+     * @name get
+     * @desc Get the Posts of a given user
+     * @param {string} username The username to get Posts for
+     * @returns {Promise}
+     * @memberOf thinkster.posts.services.Posts
+     */
+    function get(username) {
+      return $http.get('/api/v1/users/' + username + '/posts/');
     }
   }
 })();

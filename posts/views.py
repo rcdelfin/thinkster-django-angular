@@ -28,3 +28,9 @@ class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method not in permissions.SAFE_METHODS:
             return (IsAuthenticatedAndOwnsObject(),)
         return (permissions.AllowAny(),)
+
+
+class UserPostsListView(generics.ListAPIView):
+    lookup_field = 'author__user__username'
+    queryset = Post.objects.order_by('-created_at')
+    serializer_class = PostSerializer
