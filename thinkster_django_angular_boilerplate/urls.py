@@ -14,7 +14,7 @@ urlpatterns = patterns(
         UserDestroyView.as_view(), name='user-destroy'),
     url(r'^api/v1/users/(?P<user__username>[a-zA-Z0-9_@+-]+)/$',
         UserProfileRetrieveUpdateView.as_view(), name='profile'),
-    url(r'^api/v1/users/(?P<user__username>[a-zA-Z0-9_@+-]+)/posts/$',
+    url(r'^api/v1/users/(?P<username>[a-zA-Z0-9_@+-]+)/posts/$',
         UserPostsListView.as_view(), name='profile-posts'),
 
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),

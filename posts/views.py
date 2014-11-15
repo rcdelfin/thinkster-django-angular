@@ -31,6 +31,9 @@ class PostRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserPostsListView(generics.ListAPIView):
-    lookup_field = 'author__user__username'
-    queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(
+            author__user__username=self.kwargs['username']
+        )
