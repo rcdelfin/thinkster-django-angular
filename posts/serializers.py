@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from authentication.serializers import UserProfileSerializer
+from authentication.serializers import AccountSerializer
 from posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = UserProfileSerializer(required=False)
+    author = AccountSerializer(required=False)
 
     class Meta:
         model = Post
