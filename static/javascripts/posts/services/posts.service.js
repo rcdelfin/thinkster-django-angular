@@ -58,8 +58,8 @@
      * @returns {Promise}
      * @memberOf thinkster.posts.services.Posts
      */
-    function get(username) {
-      return $http.get('/api/v1/users/' + username + '/posts/');
+    function get(id) {
+      return $http.get('/api/v1/accounts/' + id + '/posts/');
     }
   }
 })();

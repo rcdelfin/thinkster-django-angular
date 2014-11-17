@@ -3,12 +3,15 @@ from django.db import models
 
 
 class AccountManager(BaseUserManager):
-    def create_account(self, email, password=None):
+    def create_account(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Users must have a valid email address.')
 
+        if not kwargs.get('username'):
+            raise ValueError('Users must have a valid username.')
+
         account = self.model(
-            email=self.normalize_email(email)
+            email=self.normalize_email(email), username=kwargs.get('username')
         )
 
         account.set_password(password)
@@ -16,8 +19,8 @@ class AccountManager(BaseUserManager):
 
         return account
 
-    def create_superuser(self, email, password):
-        account = self.create_account(email, password)
+    def create_superuser(self, email, password, **kwargs):
+        account = self.create_account(email, password, **kwargs)
 
         account.is_admin = True
         account.save()
@@ -27,6 +30,7 @@ class AccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=40, unique=True)
 
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
@@ -37,9 +41,10 @@ class Account(AbstractBaseUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    USERNAME_FIELD = 'email'
-
     objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def __unicode__(self):
         return self.email

@@ -20,13 +20,13 @@
   text-decoration: none;
 }
 
-.profile {}
+.account {}
 
-.profile .profile__header {
+.account .account__header {
   margin-bottom: 20px;
   text-align: center;
 }
 
-.profile .profile__username {
+.account .account__username {
   font-weight: bold;
 }

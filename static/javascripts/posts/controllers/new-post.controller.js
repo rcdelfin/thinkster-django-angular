@@ -28,7 +28,7 @@
       $rootScope.$broadcast('post.created', {
         content: vm.content,
         author: {
-          username: Authentication.getAuthenticatedUser().username
+          username: Authentication.getAuthenticatedAccount().username
         }
       });
 

@@ -1,23 +1,23 @@
 /**
-* ProfileController
-* @namespace thinkster.profiles.controllers
+* AccountController
+* @namespace thinkster.accounts.controllers
 */
 (function () {
   'use strict';
 
   angular
-    .module('thinkster.profiles.controllers')
-    .controller('ProfileController', ProfileController);
+    .module('thinkster.accounts.controllers')
+    .controller('AccountController', AccountController);
 
-  ProfileController.$inject = ['$location', '$routeParams', 'Posts', 'Profile', 'Snackbar'];
+  AccountController.$inject = ['$location', '$routeParams', 'Posts', 'Account', 'Snackbar'];
 
   /**
-  * @namespace ProfileController
+  * @namespace AccountController
   */
-  function ProfileController($location, $routeParams, Posts, Profile, Snackbar) {
+  function AccountController($location, $routeParams, Posts, Account, Snackbar) {
     var vm = this;
 
-    vm.profile = undefined;
+    vm.account = undefined;
     vm.posts = [];
 
     activate();
@@ -25,28 +25,28 @@
     /**
     * @name activate
     * @desc Actions to be performed when this controller is instantiated
-    * @memberOf thinkster.profiles.controllers.ProfileController
+    * @memberOf thinkster.accounts.controllers.AccountController
     */
     function activate() {
       var username = $routeParams.username.substr(1);
 
-      Profile.get(username).then(profileSuccessFn, profileErrorFn);
+      Account.get(username).then(accountSuccessFn, accountErrorFn);
       Posts.get(username).then(postsSuccessFn, postsErrorFn);
 
       /**
-      * @name profileSuccessProfile
-      * @desc Update `profile` on viewmodel
+      * @name accountSuccessAccount
+      * @desc Update `account` on viewmodel
       */
-      function profileSuccessFn(data, status, headers, config) {
-        vm.profile = data.data;
+      function accountSuccessFn(data, status, headers, config) {
+        vm.account = data.data;
       }
 
 
       /**
-      * @name profileErrorFn
+      * @name accountErrorFn
       * @desc Redirect to index and show error Snackbar
       */
-      function profileErrorFn(data, status, headers, config) {
+      function accountErrorFn(data, status, headers, config) {
         $location.url('/');
         Snackbar.error('That user does not exist.');
       }

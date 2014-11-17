@@ -1,6 +1,6 @@
-from rest_framework import generics, permissions, viewsets
+from rest_framework import permissions, viewsets
+from rest_framework.response import Response
 
-from authentication.models import Account
 from posts.models import Post
 from posts.permissions import IsAuthorOfPost
 from posts.serializers import PostSerializer
@@ -21,8 +21,12 @@ class PostViewSet(viewsets.ModelViewSet):
         return super(PostViewSet, self).pre_save(obj)
 
 
-class AccountPostsListView(generics.ListAPIView):
+class AccountPostsViewSet(viewsets.ViewSet):
+    queryset = Post.objects.select_related('author').all()
     serializer_class = PostSerializer
 
-    def get_queryset(self):
-        return Post.objects.filter(author_id=self.kwargs['author_id'])
+    def list(self, request, account_username=None):
+        queryset = self.queryset.filter(author__username=account_username)
+        serializer = self.serializer_class(queryset, many=True)
+
+        return Response(serializer.data)

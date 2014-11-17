@@ -5,10 +5,10 @@
     .module('thinkster', [
       'thinkster.config',
       'thinkster.routes',
+      'thinkster.accounts',
       'thinkster.authentication',
       'thinkster.layout',
       'thinkster.posts',
-      'thinkster.profiles',
       'thinkster.utils'
     ]);
 
