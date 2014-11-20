@@ -3,7 +3,7 @@ from django.db import models
 
 
 class AccountManager(BaseUserManager):
-    def create_account(self, email, password=None, **kwargs):
+    def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Users must have a valid email address.')
 
@@ -20,7 +20,7 @@ class AccountManager(BaseUserManager):
         return account
 
     def create_superuser(self, email, password, **kwargs):
-        account = self.create_account(email, password, **kwargs)
+        account = self.create_user(email, password, **kwargs)
 
         account.is_admin = True
         account.save()
