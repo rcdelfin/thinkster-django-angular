@@ -2,7 +2,7 @@
  * Snackbar
  * @namespace thinkster.utils.services
  */
-(function () {
+(function ($, _) {
   'use strict';
 
   angular
@@ -63,4 +63,4 @@
       _snackbar(content, options);
     }
   }
-})();
+})($, _);
