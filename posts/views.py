@@ -22,7 +22,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class AccountPostsViewSet(viewsets.ViewSet):
-    queryset = Post.objects.select_related('author').all()
+    queryset = Post.objects.select_related('author').order_by('-created_at')
     serializer_class = PostSerializer
 
     def list(self, request, account_username=None):
