@@ -24,17 +24,13 @@ class AccountViewSet(viewsets.ModelViewSet):
 
         return (permissions.IsAuthenticated(), IsAccountOwner(),)
 
-
     def create(self, request):
-        serializer = self.serializer_class(data=request.DATA)
+        serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
-            account = Account.objects.create_user(**request.DATA)
+            Account.objects.create_user(**serializer.validated_data)
 
-            account.set_password(request.DATA.get('password'))
-            account.save()
-
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
         return Response({
             'status': 'Bad request',
             'message': 'Account could not be created with received data.'

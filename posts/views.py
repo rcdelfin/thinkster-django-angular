@@ -15,10 +15,10 @@ class PostViewSet(viewsets.ModelViewSet):
             return (permissions.AllowAny(),)
         return (permissions.IsAuthenticated(), IsAuthorOfPost(),)
 
-    def pre_save(self, obj):
-        obj.author = self.request.user
+    def perform_create(self, serializer):
+        instance = serializer.save(author=self.request.user)
 
-        return super(PostViewSet, self).pre_save(obj)
+        return super(PostViewSet, self).perform_create(serializer)
 
 
 class AccountPostsViewSet(viewsets.ViewSet):

@@ -1,10 +1,10 @@
 from django.conf.urls import include, patterns, url
-from django.views.generic.base import TemplateView
 
 from rest_framework_nested import routers
 
 from authentication.views import AccountViewSet, LoginView, LogoutView
 from posts.views import AccountPostsViewSet, PostViewSet
+from thinkster_django_angular_boilerplate.views import IndexView
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
@@ -23,6 +23,5 @@ urlpatterns = patterns(
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
 
-    url(r'^.*$',
-        TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'^.*$', IndexView.as_view(), name='index'),
 )

@@ -5,7 +5,7 @@ from posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = AccountSerializer(required=False)
+    author = AccountSerializer(read_only=True, required=False)
 
     class Meta:
         model = Post

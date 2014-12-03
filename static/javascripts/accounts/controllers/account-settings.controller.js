@@ -74,7 +74,7 @@
      * @memberOf thinkster.accounts.controllers.AccountSettingsController
      */
     function destroy() {
-      Account.destroy(vm.account).then(accountSuccessFn, accountErrorFn);
+      Account.destroy(vm.account.username).then(accountSuccessFn, accountErrorFn);
 
       /**
        * @name accountSuccessFn
