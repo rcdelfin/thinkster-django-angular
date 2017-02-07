@@ -1,5 +1,5 @@
 """
-Django settings for thinkster_django_angular_boilerplate project.
+Django settings for webapp project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$6(x*g_2g9l_*g8peb-@anl5^*8q!1w)k&e&2!i)t6$s8kia94'
+SECRET_KEY = 'l5^*8q!1w)k&e&2!g9l_*g8peb-@ani)t6$s8kia94$6(x*g_2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
@@ -53,9 +53,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'thinkster_django_angular_boilerplate.urls'
+ROOT_URLCONF = 'webapp.urls'
 
-WSGI_APPLICATION = 'thinkster_django_angular_boilerplate.wsgi.application'
+WSGI_APPLICATION = 'webapp.wsgi.application'
 
 
 # Database
